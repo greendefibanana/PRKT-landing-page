@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PRKT | The Agent Wallet Built for Real Capital</title>
+    <meta
+      name="description"
+      content="PRKT is the policy-enforced, verifiable agent wallet for Solana teams that need autonomous execution with hard limits, local or remote-signing custody, and public proof."
+    />
+    <link rel="icon" type="image/png" href="../logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/site.css" />
+    <script defer src="assets/site.js"></script>
+  </head>
+  <body data-page="home">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="site-header__inner">
+          <a class="brand" href="index.html">
+            <img class="brand__logo" src="../logo.png" alt="PRKT logo" />
+            <span class="brand__wordmark">
+              <span class="brand__title">PRKT</span>
+              <span class="brand__tag">Agent Wallet OS</span>
+            </span>
+          </a>
+
+          <nav class="site-nav" aria-label="Primary">
+            <button
+              class="nav-toggle"
+              type="button"
+              aria-label="Toggle navigation"
+              aria-expanded="false"
+              data-nav-toggle
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            </button>
+            <div class="site-nav__links" data-nav-links>
+              <a href="#why-prkt">Why PRKT</a>
+              <a href="#control-stack">Control stack</a>
+              <a href="#proof">Proof</a>
+              <a href="#operators">Operators</a>
+              <a href="docs.html">Documentation</a>
+            </div>
+            <div class="site-nav__actions">
+              <a class="subtle-button" href="docs.html">Read docs</a>
+              <a class="button button--primary" href="https://github.com/greendefibanana/PRKT">GitHub</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero hero--sales" id="launch">
+          <div class="hero__content reveal">
+            <span class="eyebrow">Built for teams shipping autonomous money movement</span>
+            <h1>
+              Every serious agent wallet eventually becomes
+              <span class="accent-text">a risk system.</span>
+            </h1>
+            <p>
+              PRKT is the wallet layer for that reality. It gives agents room to execute, but only inside a hard
+              perimeter: policy enforcement before send, local or remote-signing custody, compressed proof
+              anchoring, onchain verifier flows, and operator evidence strong enough for capital allocators,
+              partners, and internal risk teams.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="docs.html">Open full documentation</a>
+              <a class="button button--secondary" href="#why-prkt">Why this is a must-have</a>
+            </div>
+
+            <div class="proof-strip" id="hero-proof">
+              <article class="proof-card">
+                <span class="proof-card__label">Wallet boundary</span>
+                <strong>Custody stays intentional</strong>
+                <p>Run local-first, remote signer, or managed verifier flows without reducing the agent to blind key access.</p>
+              </article>
+              <article class="proof-card">
+                <span class="proof-card__label">Execution boundary</span>
+                <strong>Policy before broadcast</strong>
+                <p>Every path is inspected, simulated, limited, and rejected when it leaves the allowed mission profile.</p>
+              </article>
+              <article class="proof-card">
+                <span class="proof-card__label">Evidence boundary</span>
+                <strong>Proof you can show</strong>
+                <p>PRKT anchors sessions and policy attestations so "the agent behaved" becomes something third parties can verify.</p>
+              </article>
+            </div>
+          </div>
+
+          <aside class="hero-panel reveal">
+            <div class="mode-switch" role="tablist" aria-label="Product modes">
+              <button class="mode-pill" type="button" data-mode="capital" aria-pressed="true">Capital</button>
+              <button class="mode-pill" type="button" data-mode="compliance" aria-pressed="false">Compliance</button>
+              <button class="mode-pill" type="button" data-mode="operators" aria-pressed="false">Operators</button>
+            </div>
+
+            <div class="terminal">
+              <div class="terminal__top">
+                <div class="terminal__lights"><span></span><span></span><span></span></div>
+                <div class="terminal__label">PRKT mission console</div>
+              </div>
+              <div class="terminal__body">
+                <div>
+                  <strong data-hero-title>Ship autonomy without surrendering the treasury</strong>
+                  <p class="mini-meta" data-hero-description>
+                    Capital can move, but only through the exact programs, spend envelopes, and simulations you approve.
+                  </p>
+                </div>
+                <div class="command-block">
+                  <pre class="mono" data-hero-command>$ prkt agent run --agent alpha
+  --strategy universal-defi
+  --policy guarded-live
+  --max-sol-per-tx-lamports 200000000
+  --simulation required</pre>
+                </div>
+                <div class="panel-meta">
+                  <article class="metric-card" data-hero-stat>
+                    <strong>2 SOL</strong>
+                    <span>daily envelope</span>
+                  </article>
+                  <article class="metric-card" data-hero-stat>
+                    <strong>1</strong>
+                    <span>blocked overflow</span>
+                  </article>
+                  <article class="metric-card" data-hero-stat>
+                    <strong>Live</strong>
+                    <span>devnet proof path</span>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <div class="logo-strip reveal" aria-label="Product pillars">
+          <div class="logo-pill">Local-first custody</div>
+          <div class="logo-pill">Policy engine</div>
+          <div class="logo-pill">Simulation gate</div>
+          <div class="logo-pill">Proof anchoring</div>
+          <div class="logo-pill">Onchain verifier</div>
+        </div>
+
+        <section class="section section--tight">
+          <div class="impact-band reveal">
+            <article class="impact-card">
+              <span class="impact-card__label">Latest matrix</span>
+              <strong data-counter="44" class="counter"></strong>
+              <p>verified steps in the March 13, 2026 devnet feature matrix</p>
+            </article>
+            <article class="impact-card">
+              <span class="impact-card__label">Failure posture</span>
+              <strong data-counter="0" class="counter"></strong>
+              <p>silent bypasses in the latest recorded proof run</p>
+            </article>
+            <article class="impact-card">
+              <span class="impact-card__label">Trust surface</span>
+              <strong data-counter="3" class="counter"></strong>
+              <p>production-shaped custody paths: local, remote signer, managed verifier</p>
+            </article>
+            <article class="impact-card">
+              <span class="impact-card__label">Control window</span>
+              <strong><span data-counter="2" class="counter"></span> SOL</strong>
+              <p>limit proven in fresh integration evidence with a rejected overflow</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="why-prkt">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Why PRKT</span>
+              <h2>The missing layer between agent ambition and deployable capital.</h2>
+            </div>
+            <p>
+              Generic "agent wallets" solve orchestration. PRKT solves the part that decides whether an autonomous
+              system can be trusted with real money, real permissions, and real scrutiny.
+            </p>
+          </div>
+
+          <div class="pain-grid">
+            <article class="pain-card reveal">
+              <span class="mini-pill">Without PRKT</span>
+              <h3>The agent gets a key and a prayer.</h3>
+              <p>
+                A normal wallet integration gives you execution access, but not a durable answer for spend caps,
+                simulation gating, deny-by-default behavior, or emergency stop control.
+              </p>
+            </article>
+            <article class="pain-card reveal">
+              <span class="mini-pill">With PRKT</span>
+              <h3>The wallet becomes a policy boundary.</h3>
+              <p>
+                Allowed programs, allowed destinations, session TTLs, transaction ceilings, suspicious delta
+                checks, and fail-closed unsupported paths turn "AI wallet" into governable infrastructure.
+              </p>
+            </article>
+            <article class="pain-card reveal">
+              <span class="mini-pill">Without PRKT</span>
+              <h3>Explaining behavior after the fact becomes trust theater.</h3>
+              <p>
+                Internal logs are not enough when an allocator, partner, or reviewer asks what the agent was
+                allowed to do and what actually happened.
+              </p>
+            </article>
+            <article class="pain-card reveal">
+              <span class="mini-pill">With PRKT</span>
+              <h3>You can point to evidence, not just narration.</h3>
+              <p>
+                Session commitments, signed policy attestations, compressed storage preference, and an onchain
+                verifier path create a reviewable proof surface around autonomous execution.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section--tight">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Need-to-have reasons</span>
+              <h2>If an agent can move funds, you need more than a good UX.</h2>
+            </div>
+            <p>
+              PRKT sells best where the downside is obvious: treasuries, agent-enabled protocols, managed
+              execution products, internal automation desks, and reviewer-facing deployments.
+            </p>
+          </div>
+
+          <div class="story-grid">
+            <article class="story-card reveal">
+              <span class="story-card__label">Treasury control</span>
+              <h3>Let the agent act, not improvise.</h3>
+              <p>
+                PRKT narrows the execution corridor so a strategy can rebalance, stake, lend, or transfer only
+                inside the perimeter you approved ahead of time.
+              </p>
+            </article>
+            <article class="story-card reveal">
+              <span class="story-card__label">Compliance posture</span>
+              <h3>Turn "we monitor it" into enforceable rules.</h3>
+              <p>
+                The runtime gives compliance and risk teams concrete controls to inspect: preset policies,
+                spend ceilings, allowlists, proof artifacts, and stop controls.
+              </p>
+            </article>
+            <article class="story-card reveal">
+              <span class="story-card__label">Buyer confidence</span>
+              <h3>Shorten the leap from demo to trust.</h3>
+              <p>
+                When you can show live devnet evidence, explorer links, and explicit boundaries between what is
+                live now and what is roadmap, the product becomes easier to buy into.
+              </p>
+            </article>
+            <article class="story-card reveal">
+              <span class="story-card__label">Operator leverage</span>
+              <h3>Give the team a brake pedal.</h3>
+              <p>
+                Emergency lock, per-agent stop, audit views, doctor checks, and fail-closed behavior make PRKT
+                something operations can actually own.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section--tight" id="operators">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Operator loop</span>
+              <h2>PRKT closes the loop from intent to evidence.</h2>
+            </div>
+            <p>
+              The point is not just execution. The point is shipping an agent runtime where policy, custody,
+              action, and proof are all part of the same operational surface.
+            </p>
+          </div>
+
+          <div class="timeline-grid">
+            <article class="timeline-card reveal">
+              <div class="timeline-index">01</div>
+              <h3>Define the envelope</h3>
+              <p>Attach a preset, set limits, allow exact programs and destinations, and choose sandbox or guarded-live behavior.</p>
+            </article>
+            <article class="timeline-card reveal">
+              <div class="timeline-index">02</div>
+              <h3>Inspect before send</h3>
+              <p>PRKT decodes instructions, blocks dangerous SPL patterns, requires simulation, and refuses unknown paths by default.</p>
+            </article>
+            <article class="timeline-card reveal">
+              <div class="timeline-index">03</div>
+              <h3>Anchor what happened</h3>
+              <p>Sessions and policy proofs are anchored with compressed-account preference and reviewer-safe fallback when needed.</p>
+            </article>
+            <article class="timeline-card reveal">
+              <div class="timeline-index">04</div>
+              <h3>Operate with control</h3>
+              <p>Monitor balances, inspect logs, trigger emergency lock, stop an agent, and verify outcomes with onchain and local evidence.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section--tight" id="control-stack">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Control stack</span>
+              <h2>Wallet, policy plane, proof surface, operator tooling.</h2>
+            </div>
+            <p>
+              PRKT is strongest when you think of it as control infrastructure for autonomous capital, not just a
+              wallet UI or SDK wrapper.
+            </p>
+          </div>
+
+          <div class="stack-grid">
+            <article class="stack-card reveal">
+              <span class="stack-card__index">01</span>
+              <h3>Custody layer</h3>
+              <p>
+                Local managed wallets with encrypted registry storage, one-time recovery export, remote signer
+                support, and a clear separation between demo keys and production-signing posture.
+              </p>
+              <ul class="inline-list">
+                <li>Encrypted local registry</li>
+                <li>Per-user local key boundary</li>
+                <li>Remote signer support</li>
+              </ul>
+            </article>
+            <article class="stack-card reveal">
+              <span class="stack-card__index">02</span>
+              <h3>Policy enforcement layer</h3>
+              <p>
+                Program allowlists, destination allowlists, spend limits, session TTLs, suspicious balance-delta
+                checks, mandatory simulation, emergency lock, and deny-unknown instruction handling.
+              </p>
+              <ul class="inline-list">
+                <li>Per-tx / per-session / per-day caps</li>
+                <li>Unknown instructions denied</li>
+                <li>Simulation-gated execution</li>
+              </ul>
+            </article>
+            <article class="stack-card reveal">
+              <span class="stack-card__index">03</span>
+              <h3>Proof and verification layer</h3>
+              <p>
+                Session anchoring, proof anchoring, compressed-account preferred storage, commitment-backed
+                fallback in reviewer mode, and a deployed onchain verifier path for managed vault execution.
+              </p>
+              <ul class="inline-list">
+                <li>Explorer-verifiable commitments</li>
+                <li>Ed25519-signed proof attestations</li>
+                <li>Managed onchain verifier path</li>
+              </ul>
+            </article>
+            <article class="stack-card reveal">
+              <span class="stack-card__index">04</span>
+              <h3>Agent and operator layer</h3>
+              <p>
+                Persistent agents, live devnet demos, CLI runbooks, audit views, monitor commands, stop controls,
+                and a hard rule that unsupported execution should fail closed.
+              </p>
+              <ul class="inline-list">
+                <li>Autonomous strategies</li>
+                <li>Operator-grade visibility</li>
+                <li>Fail-closed unsupported paths</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="proof">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Live proof</span>
+              <h2>The sales story is backed by live devnet evidence.</h2>
+            </div>
+            <p>
+              PRKT already has a reviewer-safe way to prove what is live today and what is not. That matters more
+              than vague claims about future zk architecture.
+            </p>
+          </div>
+
+          <div class="evidence-grid">
+            <article class="evidence-card reveal">
+              <h3>Latest devnet feature matrix</h3>
+              <ul class="evidence-list">
+                <li><strong>Status:</strong> PASS with 44 ok, 3 warn, 2 skip, 0 fail</li>
+                <li><strong>Generated:</strong> March 13, 2026</li>
+                <li><strong>Session ID:</strong> <code>9c3a1a2f-b0e5-413e-a041-db08608b2e81</code></li>
+                <li><strong>Proof signature:</strong> <code>3pGQvVaNYh8eeorRkkvDJwSzZE19Rfkc17H1Q1dJh4DdW4bT6HmdddiQn9GTrz8VNx2JtW6jUjgwqUqGp5rGNZn2</code></li>
+              </ul>
+              <div class="cta-actions">
+                <a class="button button--secondary" href="../artifacts/devnet-feature-matrix.md">Open matrix artifact</a>
+              </div>
+            </article>
+
+            <article class="evidence-card reveal">
+              <h3>Fresh policy-limit evidence</h3>
+              <ul class="evidence-list">
+                <li><strong>Session anchor:</strong> <a href="https://explorer.solana.com/tx/5cNdc8w615FDpYUAW2Vdf93i42UT8GnZwuz73cLJiUc3AwxyiTRes21gaAYHzC5K7tjUSbkC6z3tg6LH7zbERJt5?cluster=devnet">Explorer link</a></li>
+                <li><strong>Policy proof:</strong> <a href="https://explorer.solana.com/tx/5tui25MrxDGhpZmzvgeE7sUkpkSHnh9uB3oJjZvPwkLHJn2iECEK95SDdYK1GZwEjwENfKfjaRPRyfGNWqPNUYDq?cluster=devnet">Explorer link</a></li>
+                <li><strong>Total spent:</strong> <code>1.100 SOL / 2 SOL limit</code></li>
+                <li><strong>Observed rejection:</strong> <code>DAILY_LIMIT_EXCEEDED</code></li>
+              </ul>
+            </article>
+
+            <article class="evidence-card reveal">
+              <h3>Managed verifier already exists</h3>
+              <ul class="evidence-list">
+                <li><strong>Program ID:</strong> <code>3sUkfLW4jtwSQFgdtWyEj8FPedtvKfXSB1J16PMUZhMG</code></li>
+                <li><strong>Managed transfer:</strong> <code>2j2gRTQSCix5zZJPG6o1NxdJpVKk4EWqf7LqeXQbgesd19BCD1hNBTgtxbRTHDwkLgNEG83UQG16j3n6GXh7EXG7</code></li>
+                <li><strong>Scope:</strong> signed payload verification before vault release</li>
+                <li><strong>Meaning:</strong> PRKT has a real onchain verifier story today, not just offchain guardrails</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="proof-strip reveal">
+            <article class="proof-card">
+              <span class="proof-card__label">Data Anchor path</span>
+              <strong>Tamper-evident audit sealing</strong>
+              <p>PRKT is designed to graduate from reviewer-safe commitments into a fuller Data Anchor-style session evidence layer.</p>
+            </article>
+            <article class="proof-card">
+              <span class="proof-card__label">zkSVM path</span>
+              <strong>Verifiable policy execution</strong>
+              <p>The roadmap endpoint is zkSVM-grade compliance proofs so reviewers can verify policy execution instead of trusting a local sandbox.</p>
+            </article>
+            <article class="proof-card">
+              <span class="proof-card__label">Neon reach</span>
+              <strong>EVM expansion without policy escape</strong>
+              <p>Neon extends PRKT toward cross-ecosystem execution, but live EVM broadcast stays explicitly gated so unsupported paths fail closed.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section--tight">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">Deployment posture</span>
+              <h2>Three ways to ship PRKT, one control philosophy.</h2>
+            </div>
+            <p>
+              PRKT can start as a local-first operator tool and still scale toward stronger signing and managed
+              execution boundaries without throwing away the same policy model.
+            </p>
+          </div>
+
+          <div class="persona-grid">
+            <article class="persona-card reveal">
+              <span class="mini-pill">Local-first</span>
+              <h3>For self-serve operators and rapid product onboarding.</h3>
+              <p>
+                Each install owns its own encrypted state, its own local key boundary, and its own agent wallets.
+                That is the fastest path to "Phantom for agents" behavior.
+              </p>
+            </article>
+            <article class="persona-card reveal">
+              <span class="mini-pill">Remote signer</span>
+              <h3>For teams that need stronger production custody.</h3>
+              <p>
+                Swap local signing for `REMOTE_SIGNER_*` while keeping the same policy inspection, monitoring, and
+                runtime controls in front of every execution attempt.
+              </p>
+            </article>
+            <article class="persona-card reveal">
+              <span class="mini-pill">Managed verifier</span>
+              <h3>For controlled vault release with onchain verification.</h3>
+              <p>
+                Use the deployed policy guard program for managed vault flows where the release of funds itself is
+                subject to signed payload verification onchain.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="cta-shell reveal">
+          <div class="cta-grid">
+            <div>
+              <span class="eyebrow">Need-to-have agent wallet</span>
+              <h2>If the agent can move money, the wallet has to be allowed to say no.</h2>
+              <p>
+                PRKT is how you make agent wallets defensible: tighter custody, stricter execution, better
+                evidence, and a product story that stands up under scrutiny.
+              </p>
+            </div>
+            <div class="cta-actions">
+              <a class="button button--primary" href="docs.html">Read the deep docs</a>
+              <a class="button button--secondary" href="../README.md">Open operator runbook</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer__top">
+          <div>
+            <img class="footer__logo" src="../logo.png" alt="PRKT logo" />
+            <p class="footer__title">PRKT</p>
+            <p>
+              A policy-enforced, verifiable agent wallet runtime for Solana teams deploying automation against real
+              capital and real review pressure.
+            </p>
+          </div>
+          <div>
+            <p class="footer__title">Product</p>
+            <ul>
+              <li><a href="#why-prkt">Why PRKT</a></li>
+              <li><a href="#control-stack">Control stack</a></li>
+              <li><a href="#proof">Live proof</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer__title">Documentation</p>
+            <ul>
+              <li><a href="docs.html">Frontend docs</a></li>
+              <li><a href="../README.md">Operator runbook</a></li>
+              <li><a href="../FULL_DOCUMENTATION.md">Full documentation</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer__title">Trust boundary</p>
+            <ul>
+              <li>Policy before execution</li>
+              <li>Cryptographic proof artifacts</li>
+              <li>Fail-closed unsupported paths</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <small>Copyright 2026 PRKT.</small>
+          <small>Live devnet evidence, explicit roadmap boundaries.</small>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

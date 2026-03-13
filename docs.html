@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PRKT Docs | Deep Operator and Product Documentation</title>
+    <meta
+      name="description"
+      content="Deep documentation for PRKT covering architecture, custody, policies, proofs, CLI workflows, production guidance, and operator incident response."
+    />
+    <link rel="icon" type="image/png" href="../logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/site.css" />
+    <script defer src="assets/site.js"></script>
+  </head>
+  <body data-page="docs">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="site-header__inner">
+          <a class="brand" href="index.html">
+            <img class="brand__logo" src="../logo.png" alt="PRKT logo" />
+            <span class="brand__wordmark">
+              <span class="brand__title">PRKT Docs</span>
+              <span class="brand__tag">Agent Command Layer</span>
+            </span>
+          </a>
+
+          <nav class="site-nav" aria-label="Primary">
+            <button
+              class="nav-toggle"
+              type="button"
+              aria-label="Toggle navigation"
+              aria-expanded="false"
+              data-nav-toggle
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            </button>
+            <div class="site-nav__links" data-nav-links>
+              <a href="index.html">Home</a>
+              <a href="#quickstart">Quickstart</a>
+              <a href="#policy">Policy</a>
+              <a href="#proofs">Proofs</a>
+              <a href="#reference">Reference</a>
+            </div>
+            <div class="site-nav__actions">
+              <a class="subtle-button" href="../FULL_DOCUMENTATION.md">Markdown docs</a>
+              <a class="button button--primary" href="index.html#launch">Back to landing page</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <section class="docs-hero reveal">
+        <span class="eyebrow">Documentation</span>
+        <h1>
+          Product, operator, and security documentation for
+          <span class="accent-text">the agent wallet built for real capital.</span>
+        </h1>
+        <p class="lede">
+          This page is the deep website version of the PRKT manual. It covers setup, custody, policies, wallet and
+          agent workflows, proof architecture, operations, demos, and production guidance with explicit notes about
+          what is live on devnet as of March 13, 2026.
+        </p>
+
+        <div class="docs-hero__meta">
+          <article class="metric-card">
+            <strong>44 / 0</strong>
+            <span>latest matrix: 44 ok, 0 fail</span>
+          </article>
+          <article class="metric-card">
+            <strong>3 modes</strong>
+            <span>local-first, remote signer, managed verifier</span>
+          </article>
+          <article class="metric-card">
+            <strong>Live now</strong>
+            <span>policy proofs, session anchoring, devnet verifier flow</span>
+          </article>
+        </div>
+      </section>
+
+      <div class="docs-frame">
+        <aside class="docs-panel reveal">
+          <h2>Documentation map</h2>
+          <nav class="sidebar-links" aria-label="Sidebar">
+            <a class="is-active" href="#overview">Overview</a>
+            <a href="#quickstart">Quickstart</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#custody">Custody</a>
+            <a href="#environment">Environment</a>
+            <a href="#policy">Policy</a>
+            <a href="#wallets">Wallets</a>
+            <a href="#agents">Agents</a>
+            <a href="#execution">Execution</a>
+            <a href="#proofs">Proofs</a>
+            <a href="#operations">Operations</a>
+            <a href="#demos">Demos</a>
+            <a href="#production">Production</a>
+            <a href="#reference">Reference</a>
+            <a href="#troubleshooting">Troubleshooting</a>
+          </nav>
+
+          <div class="docs-cta">
+            <strong>Search the whole manual.</strong>
+            <p class="mini-meta">
+              Search works locally across section bodies, command examples, config names, and proof terminology.
+            </p>
+          </div>
+        </aside>
+
+        <main class="docs-main">
+          <section class="docs-toolbar reveal">
+            <label class="search-field" aria-label="Search documentation">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="M20 20l-3.5-3.5"></path>
+              </svg>
+              <input
+                type="search"
+                placeholder="Search sections, commands, env vars, or proof details"
+                data-docs-search
+              />
+            </label>
+
+            <div class="filter-row" aria-label="Filters">
+              <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+              <button class="filter-chip" type="button" data-filter="getting-started">Getting started</button>
+              <button class="filter-chip" type="button" data-filter="runtime">Runtime</button>
+              <button class="filter-chip" type="button" data-filter="security">Security</button>
+              <button class="filter-chip" type="button" data-filter="operations">Operations</button>
+              <button class="filter-chip" type="button" data-filter="reference">Reference</button>
+            </div>
+          </section>
+
+          <div class="results-line reveal" data-results-count>15 sections visible</div>
+
+          <section class="doc-list">
+            <article class="doc-section reveal" id="overview" data-doc-card data-tags="getting-started runtime security overview product">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Overview</span>
+                  <h2>What PRKT is and why it exists</h2>
+                </div>
+                <span class="doc-badge">Foundational</span>
+              </div>
+              <p>
+                PRKT is a local-first, policy-enforced Solana agent wallet runtime. Each install owns its own state,
+                each agent can have its own wallet, and every autonomous action still passes through policy,
+                simulation, and execution controls before it can hit the chain.
+              </p>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>What PRKT adds</h3>
+                  <p>Hard execution guardrails, wallet custody options, local audit state, proof anchoring, and an operator control surface.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>What it is not</h3>
+                  <p>Not unconstrained autonomy, not a single hosted key for all users, and not a present-tense zero-knowledge system.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Who needs it</h3>
+                  <p>Funds, treasuries, protocols, automation teams, and products that need to prove an agent stayed inside policy.</p>
+                </div>
+              </div>
+              <div class="doc-note">
+                <strong>Current truth:</strong>
+                PRKT is live on Solana devnet today with policy enforcement, session/proof anchoring, compressed-account preference, and an onchain verifier path for managed execution.
+              </div>
+              <div class="doc-note">
+                <strong>Architecture direction:</strong>
+                PRKT is being positioned around four compounding infrastructure lanes: compressed Solana state, Data Anchor-grade audit sealing, zkSVM-grade verifiable policy execution, and Neon EVM reach under the same policy boundary.
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="quickstart" data-doc-card data-tags="getting-started quickstart install runtime">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Quickstart</span>
+                  <h2>Fastest path from install to first governed agent run</h2>
+                </div>
+                <button
+                  class="button button--ghost copy-button"
+                  type="button"
+                  data-copy="npm install -g @prktsol/prkt
+prkt init
+prkt config show
+prkt doctor
+prkt agent create --agent alpha --owner ops-team
+prkt agent fund --agent alpha --sol 1
+prkt agent run --agent alpha --strategy memo-heartbeat"
+                >
+                  Copy steps
+                </button>
+              </div>
+              <div class="doc-code">
+                <pre class="mono">npm install -g @prktsol/prkt
+prkt init
+prkt config show
+prkt doctor
+prkt agent create --agent alpha --owner ops-team
+prkt agent fund --agent alpha --sol 1
+prkt agent run --agent alpha --strategy memo-heartbeat
+prkt agent logs --agent alpha
+prkt audit --limit 50</pre>
+              </div>
+              <div class="doc-grid">
+                <div class="doc-card">
+                  <h3>From source instead</h3>
+                  <pre class="mono">npm install
+npm run cli -- --help
+npm run demo:feature-matrix:devnet</pre>
+                </div>
+                <div class="doc-card">
+                  <h3>Recommended first checks</h3>
+                  <ul class="doc-listing">
+                    <li><code>prkt init</code> initializes local state and reveals the custody model.</li>
+                    <li><code>prkt config show</code> prints cluster, wallet key source, and live flags.</li>
+                    <li><code>prkt doctor</code> checks RPC connectivity, signer posture, and local writability.</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="architecture" data-doc-card data-tags="runtime architecture getting-started">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Architecture</span>
+                  <h2>How the runtime is layered</h2>
+                </div>
+                <span class="doc-badge">5 layers</span>
+              </div>
+              <div class="doc-steps">
+                <div class="doc-step">
+                  <strong>1. CLI and operator control plane</strong>
+                  <p>Commands for initialization, wallets, agents, policy management, monitoring, audit, config, and diagnostics.</p>
+                </div>
+                <div class="doc-step">
+                  <strong>2. Local registry and persistent state</strong>
+                  <p>Wallets, agents, activity, and the local platform key live in a per-user state directory.</p>
+                </div>
+                <div class="doc-step">
+                  <strong>3. Wallet and transaction services</strong>
+                  <p>Encryption, balances, ATA management, transaction build/simulate/send/confirm, RPC failover, and post-transaction verification.</p>
+                </div>
+                <div class="doc-step">
+                  <strong>4. Policy and sandbox layer</strong>
+                  <p>Spend caps, allowlists, deny-unknown behavior, suspicious-delta rejection, emergency lock, and simulation requirement.</p>
+                </div>
+                <div class="doc-step">
+                  <strong>5. Agent runtime and protocol execution</strong>
+                  <p>Persistent agents, strategy execution, live-first protocol flows, and fail-closed unsupported paths.</p>
+                </div>
+              </div>
+              <div class="doc-note">
+                <strong>Design rule:</strong>
+                no strategy bypasses policy or signing boundaries. Autonomy exists inside the runtime, not outside it.
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="custody" data-doc-card data-tags="security getting-started custody runtime">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Custody</span>
+                  <h2>Custody model, local state, encryption, and recovery</h2>
+                </div>
+                <span class="doc-badge">Security-critical</span>
+              </div>
+              <p>
+                The default PRKT custody model is <code>local-per-user</code>. Each installation owns its own
+                encrypted wallet registry. That means 100 installs imply 100 custody boundaries, not one shared key server.
+              </p>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Local-first mode</h3>
+                  <p>PRKT generates or reuses a per-user platform key, encrypts wallet secrets at rest, and stores state in the OS app-data directory unless overridden.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Remote signer mode</h3>
+                  <p>Set <code>REMOTE_SIGNER_URL</code>, <code>REMOTE_SIGNER_BEARER_TOKEN</code>, and <code>REMOTE_SIGNER_PUBKEY</code> together to move signing off-box.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Recovery path</h3>
+                  <p>Wallet and agent creation return a one-time <code>recoveryKey</code>, required for later secret export.</p>
+                </div>
+              </div>
+              <div class="doc-grid">
+                <div class="doc-card">
+                  <h3>Default state locations</h3>
+                  <ul class="doc-listing">
+                    <li>Windows: <code>%APPDATA%\PRKT\</code></li>
+                    <li>macOS: <code>~/Library/Application Support/PRKT/</code></li>
+                    <li>Linux: <code>${XDG_DATA_HOME:-~/.local/share}/prkt/</code></li>
+                    <li>Override: <code>PRKT_CLI_HOME</code></li>
+                  </ul>
+                </div>
+                <div class="doc-card">
+                  <h3>Typical files</h3>
+                  <ul class="doc-listing">
+                    <li><code>cli-wallets.json</code></li>
+                    <li><code>cli-agents.json</code></li>
+                    <li><code>cli-activity.json</code></li>
+                    <li><code>platform-wallet-master.key</code></li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="environment" data-doc-card data-tags="getting-started reference environment operations">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Environment</span>
+                  <h2>Configuration model and the variables that matter most</h2>
+                </div>
+                <button class="button button--ghost copy-button" type="button" data-copy="cp .env.example .env">
+                  Copy init
+                </button>
+              </div>
+              <div class="doc-table">
+                <div class="doc-table__row doc-table__row--head">
+                  <span>Variable</span>
+                  <span>Purpose</span>
+                  <span>Use it for</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>SOLANA_RPC_URL</code></span>
+                  <span>Primary cluster endpoint</span>
+                  <span>Core network path</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>SOLANA_RPC_FALLBACK_URL</code></span>
+                  <span>Secondary RPC</span>
+                  <span>Failover during degraded devnet</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>PRKT_WALLET_MASTER_KEY</code></span>
+                  <span>Deterministic platform key source</span>
+                  <span>Managed deployments</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>REMOTE_SIGNER_*</code></span>
+                  <span>Off-box signing boundary</span>
+                  <span>Production custody posture</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>POLICY_SESSION_TTL_MINUTES</code></span>
+                  <span>Session expiration window</span>
+                  <span>Control live session lifetime</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>ENABLE_LIVE_*</code></span>
+                  <span>Live-path gates</span>
+                  <span>Explicitly decide which protocols may execute for real</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>ZK_COMPRESSION_API_URL</code>, <code>ZK_PROVER_URL</code></span>
+                  <span>Compressed storage preference</span>
+                  <span>Reviewer-safe proof flows</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>NEON_BROADCAST_ENABLED</code></span>
+                  <span>Explicit Neon live-broadcast gate</span>
+                  <span>Keep EVM execution fail-closed until you deliberately enable it</span>
+                </div>
+                <div class="doc-table__row">
+                  <span><code>IMPLEMENTATION_PATH</code></span>
+                  <span>Execution posture toggle</span>
+                  <span>Use <code>defensible_devnet_demo</code> for commitment fallback</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="policy" data-doc-card data-tags="security runtime policy reference">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Policy</span>
+                  <h2>How PRKT says yes, no, and not until it is safe</h2>
+                </div>
+                <button
+                  class="button button--ghost copy-button"
+                  type="button"
+                  data-copy="prkt policy show --agent alpha
+prkt policy set-preset --agent alpha --preset guarded-live
+prkt policy set-limits --agent alpha --max-sol-per-tx-lamports 100000000 --max-transactions-per-session 3"
+                >
+                  Copy policy flow
+                </button>
+              </div>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Presets</h3>
+                  <ul class="doc-listing">
+                    <li><code>observe-only</code></li>
+                    <li><code>simulate-only</code></li>
+                    <li><code>auto-devnet-safe</code></li>
+                    <li><code>guarded-live</code></li>
+                    <li><code>custom</code></li>
+                  </ul>
+                </div>
+                <div class="doc-card">
+                  <h3>What policy constrains</h3>
+                  <p>Approval mode, spend, tx count, session TTL, mints, destinations, program IDs, opaque instructions, and simulation requirements.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Hard blocks</h3>
+                  <p>Dangerous SPL delegation, close-account drains, owner or mint authority changes, and deny-unknown instruction behavior by default.</p>
+                </div>
+              </div>
+              <div class="doc-code">
+                <pre class="mono">prkt policy presets
+prkt policy show --agent alpha
+prkt policy set-preset --agent alpha --preset guarded-live
+prkt policy set-limits --agent alpha --max-sol-per-tx-lamports 100000000 --max-transactions-per-session 3
+prkt policy clear-overrides --agent alpha</pre>
+              </div>
+              <div class="doc-note">
+                <strong>Important:</strong>
+                <code>guarded-live</code> enables live-capable behavior, but it does not disable guardrails.
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="wallets" data-doc-card data-tags="runtime reference getting-started wallets">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Wallet workflows</span>
+                  <h2>Managed wallet lifecycle and treasury-style operations</h2>
+                </div>
+                <span class="doc-badge">Command-driven</span>
+              </div>
+              <div class="doc-code">
+                <pre class="mono">prkt wallet create --name treasury
+prkt wallet fund --name treasury --sol 2
+prkt wallet balance --name treasury
+prkt token mint-demo --authority treasury --decimals 6 --amount 1000
+prkt wallet balance-spl --name treasury --mint &lt;mint-address&gt;
+prkt wallet transfer-sol --from treasury --to &lt;recipient-pubkey&gt; --amount 0.1
+prkt wallet transfer-spl --from treasury --to &lt;recipient-owner-pubkey&gt; --mint &lt;mint-address&gt; --amount 10</pre>
+              </div>
+              <div class="doc-grid">
+                <div class="doc-card">
+                  <h3>Create behavior</h3>
+                  <p>PRKT generates a wallet, encrypts the secret, stores it locally, returns a one-time recovery key, and keeps registry state in sync.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Funding behavior</h3>
+                  <p>If a devnet treasury is configured, PRKT funds from that treasury first. Otherwise it uses an airdrop-oriented devnet path.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="agents" data-doc-card data-tags="runtime getting-started agents reference">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Agent workflows</span>
+                  <h2>Persistent agents, wallet attachment, and runtime state</h2>
+                </div>
+                <button
+                  class="button button--ghost copy-button"
+                  type="button"
+                  data-copy="prkt agent create --agent alpha --owner ops-team
+prkt agent show --agent alpha
+prkt agent run --agent alpha --strategy memo-heartbeat
+prkt agent logs --agent alpha
+prkt agent stop --agent alpha"
+                >
+                  Copy agent flow
+                </button>
+              </div>
+              <p>
+                An agent in PRKT is a persistent identity with a managed wallet, policy preset, optional overrides,
+                strategy choice, and runtime activity history.
+              </p>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Create</h3>
+                  <p><code>prkt agent create</code> provisions the wallet, records the agent, attaches the default policy, and returns the recovery key.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Inspect</h3>
+                  <p><code>prkt agent show</code> returns persisted state plus the resolved policy view.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Operate</h3>
+                  <p><code>run</code>, <code>run-all</code>, <code>logs</code>, <code>balance</code>, and <code>stop</code> make agents usable in scheduler or operator-led loops.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="execution" data-doc-card data-tags="runtime security execution reference">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Execution model</span>
+                  <h2>Strategies, live paths, simulation, and fail-closed behavior</h2>
+                </div>
+                <span class="doc-badge">Reality check</span>
+              </div>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Current strategy names</h3>
+                  <ul class="doc-listing">
+                    <li><code>memo-heartbeat</code></li>
+                    <li><code>simple-scripted-transfer</code></li>
+                    <li><code>universal-defi</code></li>
+                  </ul>
+                </div>
+                <div class="doc-card">
+                  <h3>Execution modes</h3>
+                  <p>PRKT supports live execution, simulation-only execution, and live-first with simulated fallback depending on cluster and protocol support.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Fail-closed rule</h3>
+                  <p>Unsupported protocol or EVM paths must not silently become ungoverned execution.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Neon expansion path</h3>
+                  <p>Neon extends PRKT's policy surface toward EVM execution, but live broadcast remains explicitly gated so unsupported paths fail closed instead of bypassing controls.</p>
+                </div>
+              </div>
+              <div class="doc-note">
+                <strong>Accurate claim:</strong>
+                some paths are live on devnet now, some are intentionally simulated, and some are live-first with fallback.
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="proofs" data-doc-card data-tags="security runtime proofs operations reference">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Proofs and verification</span>
+                  <h2>Session anchoring, policy attestation, compressed storage, and the onchain verifier</h2>
+                </div>
+                <span class="doc-badge">Live on devnet</span>
+              </div>
+              <p>
+                PRKT's current proof model is cryptographically verifiable, but it is not zero-knowledge yet. There
+                are two proof-verification paths live today.
+              </p>
+              <p>
+                The broader stack being sold to reviewers is bigger than today's minimum live path: Data Anchor-style
+                tamper-proof session sealing, zkSVM-grade compliance verification, and a future zero-knowledge proof
+                surface that lets third parties verify policy execution without trusting the operator.
+              </p>
+              <div class="doc-grid">
+                <div class="doc-card">
+                  <h3>Offchain attestation path</h3>
+                  <ul class="doc-listing">
+                    <li><code>PolicyCircuit.prove()</code> builds a signed policy attestation.</li>
+                    <li>The payload includes intent hash, policy hash, and check outcomes.</li>
+                    <li><code>ProofAnchor.anchorProof()</code> stores the attestation with compressed-account preference.</li>
+                    <li><code>ProofAnchor.verifyProof()</code> reconstructs the digest and verifies the detached signature.</li>
+                  </ul>
+                </div>
+                <div class="doc-card">
+                  <h3>Onchain verifier path</h3>
+                  <ul class="doc-listing">
+                    <li><code>programs/policy_guard</code> is deployed on devnet.</li>
+                    <li>The Solana Ed25519 precompile plus instruction introspection verify a signed managed-transfer payload onchain.</li>
+                    <li>Current program ID: <code>3sUkfLW4jtwSQFgdtWyEj8FPedtvKfXSB1J16PMUZhMG</code>.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Data Anchor direction</h3>
+                  <p>The audit model is aimed at a Data Anchor-grade outcome: session logs sealed into a public, tamper-evident commitment trail that outside reviewers can verify independently.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>zkSVM direction</h3>
+                  <p>The long-form proof story is a zkSVM-style verifier path where policy execution moves from signed attestation toward stronger cryptographic compliance proofs.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Zero-knowledge upgrade</h3>
+                  <p>Today&apos;s live model is verifiable attestation plus an onchain managed verifier. The next upgrade is a true zero-knowledge proof path rather than a trust-me sandbox claim.</p>
+                </div>
+              </div>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Session anchoring</h3>
+                  <p><code>SessionAnchor.startSession()</code> and <code>closeSession()</code> write session commitments with compressed-account preference.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Fallback mode</h3>
+                  <p>In <code>IMPLEMENTATION_PATH=defensible_devnet_demo</code>, PRKT falls back to commitment-only anchors plus a local payload registry.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Latest evidence</h3>
+                  <p>March 13, 2026 matrix session ID <code>9c3a1a2f-b0e5-413e-a041-db08608b2e81</code> and proof signature <code>3pGQvVaNYh8eeorRkkvDJwSzZE19Rfkc17H1Q1dJh4DdW4bT6HmdddiQn9GTrz8VNx2JtW6jUjgwqUqGp5rGNZn2</code>.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="operations" data-doc-card data-tags="operations security runtime monitoring">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Operations</span>
+                  <h2>Monitoring, audit, emergency controls, and incident response</h2>
+                </div>
+                <span class="doc-badge">Operator-grade</span>
+              </div>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Monitor commands</h3>
+                  <ul class="doc-listing">
+                    <li><code>prkt monitor overview</code></li>
+                    <li><code>prkt monitor balances</code></li>
+                    <li><code>prkt monitor txs</code></li>
+                    <li><code>prkt monitor agents</code></li>
+                    <li><code>prkt monitor watch --interval 5</code></li>
+                  </ul>
+                </div>
+                <div class="doc-card">
+                  <h3>Audit surfaces</h3>
+                  <p><code>prkt audit --limit 200</code> and <code>prkt agent logs --agent ...</code> explain rejections and support incident review.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Emergency controls</h3>
+                  <p>Emergency lock can be set in the environment or file, agents can be stopped explicitly, and repeated failures can trigger circuit-breaker behavior.</p>
+                </div>
+              </div>
+              <div class="doc-steps">
+                <div class="doc-step">
+                  <strong>Detect</strong>
+                  <p>Use audit trail, balance verification, tx history, and repeated failure signals.</p>
+                </div>
+                <div class="doc-step">
+                  <strong>Contain</strong>
+                  <p>Enable the emergency lock, pause the agent, and stop live execution before debugging the root cause.</p>
+                </div>
+                <div class="doc-step">
+                  <strong>Recover</strong>
+                  <p>Fix policy or config, clear the lock, start a fresh session, and verify balances after resuming.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="demos" data-doc-card data-tags="operations runtime getting-started demos reference">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Demos and evidence</span>
+                  <h2>What to run when you need proof quickly</h2>
+                </div>
+                <button
+                  class="button button--ghost copy-button"
+                  type="button"
+                  data-copy="npm run release:check
+npm run demo:feature-matrix:devnet
+npm run demo:autonomous-agent-wallet:devnet
+npm run demo:autonomous-portfolio:devnet"
+                >
+                  Copy demo flow
+                </button>
+              </div>
+              <div class="doc-code">
+                <pre class="mono">npm run release:check
+npm run demo:rehearsal
+npm run demo:feature-matrix:devnet
+npm run demo:autonomous-agent-wallet:devnet
+npm run demo:autonomous-portfolio:devnet
+npm run wallet:devnet
+npm run simulate-attack
+npm run stress:agents</pre>
+              </div>
+              <div class="doc-note">
+                <strong>Artifacts:</strong>
+                the feature matrix emits <code>artifacts/devnet-feature-matrix.json</code> and <code>artifacts/devnet-feature-matrix.md</code>.
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="production" data-doc-card data-tags="security operations runtime production">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Production guidance</span>
+                  <h2>How to describe and deploy PRKT honestly</h2>
+                </div>
+                <span class="doc-badge">Messaging-safe</span>
+              </div>
+              <div class="doc-grid">
+                <div class="doc-card">
+                  <h3>Correct product statement</h3>
+                  <p>Each user gets local wallet custody by default, each install owns its own encrypted state, and agents act within policy constraints.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Claims to avoid</h3>
+                  <p>Do not call PRKT a shared wallet backend, unconstrained autonomy, or live zk proof infrastructure today.</p>
+                </div>
+              </div>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Self-serve deployment</h3>
+                  <p>Use the default local state model, keep live flags intentional, and treat PRKT as a user-owned wallet runtime.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Managed operations</h3>
+                  <p>Use persistent <code>PRKT_CLI_HOME</code>, inject <code>PRKT_WALLET_MASTER_KEY</code>, and move signing behind a remote signer.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Reviewer messaging</h3>
+                  <p>Lead with policy enforcement, explorer-verifiable commitments, compressed-account preference, and explicit live-versus-roadmap boundaries.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="reference" data-doc-card data-tags="reference runtime security operations">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Reference</span>
+                  <h2>Command families, package entrypoints, and integration surfaces</h2>
+                </div>
+                <span class="doc-badge">CLI map</span>
+              </div>
+              <div class="doc-grid doc-grid--three">
+                <div class="doc-card">
+                  <h3>Top-level command groups</h3>
+                  <ul class="doc-listing">
+                    <li><code>init</code></li>
+                    <li><code>wallet</code></li>
+                    <li><code>token</code></li>
+                    <li><code>policy</code></li>
+                    <li><code>agent</code></li>
+                    <li><code>monitor</code></li>
+                    <li><code>audit</code></li>
+                    <li><code>config</code></li>
+                    <li><code>doctor</code></li>
+                    <li><code>completion</code></li>
+                  </ul>
+                </div>
+                <div class="doc-card">
+                  <h3>Published entrypoints</h3>
+                  <ul class="doc-listing">
+                    <li><code>prkt</code> for the CLI</li>
+                    <li><code>prkt-devnet-matrix</code> for the fast proof runner</li>
+                    <li><code>--json</code> for machine-readable output</li>
+                  </ul>
+                </div>
+                <div class="doc-card">
+                  <h3>Node integration surface</h3>
+                  <pre class="mono">const {
+  WalletManager,
+  PolicyEngine,
+  SessionAnchor,
+  ProofAnchor
+} = require("@prktsol/prkt");</pre>
+                </div>
+              </div>
+              <div class="doc-grid">
+                <div class="doc-card">
+                  <h3>Helpful companion docs</h3>
+                  <ul class="doc-listing">
+                    <li><a href="../README.md">README.md</a></li>
+                    <li><a href="../FULL_DOCUMENTATION.md">FULL_DOCUMENTATION.md</a></li>
+                    <li><a href="../CLI.md">CLI.md</a></li>
+                    <li><a href="../ARCHITECTURE.md">ARCHITECTURE.md</a></li>
+                    <li><a href="../artifacts/security-deep-dive.md">artifacts/security-deep-dive.md</a></li>
+                  </ul>
+                </div>
+                <div class="doc-card">
+                  <h3>Key repo scripts</h3>
+                  <ul class="doc-listing">
+                    <li><code>npm run demo:feature-matrix:devnet</code></li>
+                    <li><code>npm run demo:autonomous-agent-wallet:devnet</code></li>
+                    <li><code>npm run demo:autonomous-portfolio:devnet</code></li>
+                    <li><code>npm run onchain:policy-guard:devnet</code></li>
+                    <li><code>npm run release:check</code></li>
+                    <li><code>npm test</code></li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="doc-section reveal" id="troubleshooting" data-doc-card data-tags="operations reference troubleshooting getting-started">
+              <div class="doc-section__header">
+                <div>
+                  <span class="doc-kicker">Troubleshooting</span>
+                  <h2>Common failures and what they usually mean</h2>
+                </div>
+                <span class="doc-badge">Practical fixes</span>
+              </div>
+              <div class="doc-grid">
+                <div class="doc-card">
+                  <h3>Wallet or agent not found</h3>
+                  <p>Check the current OS user and <code>PRKT_CLI_HOME</code>. PRKT state is local and per-install.</p>
+                </div>
+                <div class="doc-card">
+                  <h3><code>cli-data-dir-writable</code> failed</h3>
+                  <p>Fix permissions or move the state with <code>PRKT_CLI_HOME</code>.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Session blocked: session has expired</h3>
+                  <p>Start a new session or increase <code>POLICY_SESSION_TTL_MINUTES</code> within the allowed range.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Program blocked or destination blocked</h3>
+                  <p>Check the preset, overrides, and allowlists attached to the agent.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Funding or RPC failures</h3>
+                  <p>Retry with a healthy endpoint, add <code>SOLANA_RPC_FALLBACK_URL</code>, or use a configured treasury wallet.</p>
+                </div>
+                <div class="doc-card">
+                  <h3>Live protocol path did not execute</h3>
+                  <p>Confirm the protocol live flag, cluster support, required config files, and actual devnet market health.</p>
+                </div>
+              </div>
+              <div class="doc-note">
+                <strong>Debug habit:</strong>
+                start with <code>prkt config show</code>, then <code>prkt doctor</code>, then <code>agent show</code>, <code>policy show</code>, and <code>audit</code>.
+              </div>
+            </article>
+          </section>
+        </main>
+
+      </div>
+    </div>
+  </body>
+</html>
